@@ -1,0 +1,15 @@
+# directories
+__pycache__/
+venv/
+.pytest_cache/
+
+# files
+*.pyc
+
+# test artifacts
+.coverage
+coverage.xml
+test-results.xml
+
+# pycharm
+*.idea/
