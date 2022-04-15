@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# ulysses.txt ~1.6MB, so need to copy it 700 times to get the file of ~1GB
+for i in $(seq 700);
+  do
+    echo $i;
+    cat file_inputs/ulysses.txt >> file_inputs/test1GB.txt;
+  done
