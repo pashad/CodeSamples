@@ -1,8 +1,6 @@
-Hey
+Hey! My name is Pavel.
 
-My name is Pavel.
-
-In this repo you can find some examples of the python code written by me:
+In this repo you can find some examples of the python code written by me recently:
 
 - [01](01) These are some extracts from the project for the company
  obtained Unicorn status when I worked there. NOTE: this is not something you can setup/run locally,

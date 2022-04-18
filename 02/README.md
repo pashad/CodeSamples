@@ -1,6 +1,6 @@
 ##### Example of test project to process large text data.
 Django project about processing large text inputs (3 options: raw text input, URLs, local file path).
-`sqlite3` db is used as an example (expect better berformance with `postgreSQL`).
+`sqlite3` db is used as an example (expect better performance with `postgreSQL`).
 Multiprocessing is used.
 
 
