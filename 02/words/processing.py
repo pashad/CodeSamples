@@ -23,6 +23,8 @@ def prepare_text_input(text):
     Hyphens and commas should be considered as part of the word,
     other characters (including digits) can be removed.
     """
+    if isinstance(text, bytes):
+        text = text.decode(errors='replace')
     mapping = defaultdict(int)
     text = re.sub(r'[^a-zA-Z\-,\s]', '', text).lower()
     for word in text.split():
@@ -57,11 +59,10 @@ def process_url_input(url):
     Assuming valid text response to be received from the URL.
     Chunk size is set to 10MB.
     """
-    results = []
     with requests.get(url, stream=True) as r:
         r.raise_for_status()
-        for chunk in r.iter_content(chunk_size=1024 * 1024 * 10):
-            results.append(prepare_text_input(chunk.decode()))
+        with Pool(max(cpu_count(), 2)) as pool:
+            results = pool.map(prepare_text_input, r.iter_content(chunk_size=1024 * 1024 * 10))
     sum_mapping = sum((Counter(mapping) for mapping in results), Counter())
     persist_to_db(dict(sum_mapping))
 
