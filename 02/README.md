@@ -1,4 +1,7 @@
-###### Example of test project to process large text data.
+##### Example of test project to process large text data.
+Django project about processing large text inputs (3 options: raw text input, URLs, local file path).
+`sqlite3` db is used as an example (expect better berformance with `postgreSQL`).
+Multiprocessing is used.
 
 
 Steps to install and use the project locally.
@@ -41,3 +44,7 @@ The endpoint to check the number of times the word appeared:
 `GET http://localhost:8000/words/word_statistics`
 
 `curl http://localhost:8000/words/word_statistics?input=UlySseS`
+
+
+##### Some metrics
+1.1 GB can be processed locally for ~34 sec (8 CPUs Intel(R) Core(TM) i5-8265U @ 1.60GHz) 
