@@ -1,5 +1,5 @@
 import re
-from collections import defaultdict, Counter
+from collections import Counter, defaultdict
 from multiprocessing import Pool, cpu_count
 
 import requests
@@ -60,7 +60,7 @@ def process_url_input(url):
     results = []
     with requests.get(url, stream=True) as r:
         r.raise_for_status()
-        for chunk in r.iter_content(chunk_size=1024*1024*10):
+        for chunk in r.iter_content(chunk_size=1024 * 1024 * 10):
             results.append(prepare_text_input(chunk.decode()))
     sum_mapping = sum((Counter(mapping) for mapping in results), Counter())
     persist_to_db(dict(sum_mapping))
@@ -73,14 +73,14 @@ def process_file_path_input(file_path):
     Read chunk size is set to 10MB.
     """
     with open(f"{BASE_DIR}/file_inputs/{file_path}") as f:
-        with Pool(cpu_count() - 1) as pool:
+        with Pool(max(cpu_count(), 2)) as pool:
             results = pool.map(prepare_text_input, read_in_chunks(f))
 
     sum_mapping = sum((Counter(mapping) for mapping in results), Counter())
     persist_to_db(dict(sum_mapping))
 
 
-def read_in_chunks(file_object, chunk_size=1024*1024*10):
+def read_in_chunks(file_object, chunk_size=1024 * 1024 * 10):
     """
     Read a file piece by piece. Default chunk size: 10MB.
     """

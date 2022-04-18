@@ -7,7 +7,7 @@ from django.views.decorators.http import require_GET, require_POST
 
 from test_project.settings import BASE_DIR
 from words.models import Word
-from words.processing import process_text_input, process_url_input, process_file_path_input
+from words.processing import process_file_path_input, process_text_input, process_url_input
 
 
 @require_POST
